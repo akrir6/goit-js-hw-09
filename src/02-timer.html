@@ -4,14 +4,47 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Countdown timer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/common.css" />
+    <style>
+      .date-selector {
+        margin: auto;
+        width: 240px;
+        display: flex;
+        justify-content: space-around;
+      }
+      .timer {
+        display: flex;
+        justify-content: center;
+        font-family: 'Kdam Thmor Pro', sans-serif;
+      }
+
+      .field {
+        width: 80px;
+        text-align: center;
+      }
+
+      .value {
+        color: #255290;
+        font-size: 48px;
+      }
+
+      .zero {
+        color: #bb271a;
+      }
+    </style>
   </head>
   <body>
     <p><a href="index.html">Go back</a></p>
-
-    <input type="text" id="datetime-picker" />
-    <button type="button" data-start disabled>Start</button>
-
+    <div class="date-selector">
+      <input type="text" id="datetime-picker" />
+      <button type="button" data-start disabled>Start</button>
+    </div>
     <div class="timer">
       <div class="field">
         <span class="value" data-days>00</span>

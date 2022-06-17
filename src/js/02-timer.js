@@ -8,24 +8,23 @@ const refs = {
   hoursField: document.querySelector('[data-hours]'),
   minutesField: document.querySelector('[data-minutes]'),
   secondsField: document.querySelector('[data-seconds]'),
+  dateTimePicker: document.querySelector('input#datetime-picker'),
 };
-
-let selectedDate;
 
 refs.startBtn.addEventListener('click', onStartBtnClick);
 
-flatpickr('input#datetime-picker', {
+const fp = flatpickr(refs.dateTimePicker, {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
     if (selectedDates[0] > Date.now()) {
-      selectedDate = selectedDates[0];
       refs.startBtn.removeAttribute('disabled');
     } else {
       Notify.failure('Please choose a date in the future', {
         position: 'center-top',
+        closeButton: true,
       });
       refs.startBtn.setAttribute('disabled', 'disabled');
     }
@@ -34,13 +33,18 @@ flatpickr('input#datetime-picker', {
 
 function onStartBtnClick() {
   refs.startBtn.setAttribute('disabled', 'disabled');
+  refs.dateTimePicker.setAttribute('disabled', 'disabled');
 
   const timer = setInterval(() => {
-    const deltaDate = selectedDate - Date.now();
+    const deltaDate = fp.selectedDates[0].getTime() - Date.now();
+
     if (deltaDate > 0) {
       renderTimer(convertMs(deltaDate));
+      refs.secondsField.classList.add('zero');
     } else {
       clearInterval(timer);
+      refs.dateTimePicker.removeAttribute('disabled');
+      refs.secondsField.classList.remove('zero');
       Notify.info("Time's up!", { position: 'center-top' });
     }
   }, 1000);
