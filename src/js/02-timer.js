@@ -45,7 +45,7 @@ function onStartBtnClick() {
       clearInterval(timer);
       refs.dateTimePicker.removeAttribute('disabled');
       refs.secondsField.classList.remove('zero');
-      Notify.info("Time's up!", { position: 'center-top' });
+      Notify.warning('やばい!!', { position: 'center-top' });
     }
   }, 1000);
 }
